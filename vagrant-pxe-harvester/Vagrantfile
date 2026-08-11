@@ -90,6 +90,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           type: 'qcow2',
           bus: 'virtio',
           device: 'vda'
+        # additional data disks for Harvester (e.g. longhorn storage)
+        libvirt.storage :file,
+          size: '10G',
+          type: 'qcow2',
+          bus: 'sata'
+        libvirt.storage :file,
+          size: '20G',
+          type: 'qcow2',
+          bus: 'sata'
         boot_network = {'network' => 'harvester'}
         libvirt.boot 'hd'
         libvirt.boot boot_network
